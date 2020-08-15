@@ -41,15 +41,15 @@ function App() {
   }, []);
 
   function getArticles() {
-    fetch('https://newsapi.org/v2/top-headlines?country=in&apiKey=406fbce2bc0d4d14af9dd7de15d23419')
-      .then(response => response.json())
-      .then(data => {
-        ALAN.activate();
-        setTimeout(() => {
-          ALAN.playText('Hi I found some news for you.');
-        }, 500);
-        setNewsArticles(data.articles);
-      });
+    // fetch('https://newsapi.org/v2/top-headlines?country=in&apiKey=406fbce2bc0d4d14af9dd7de15d23419')
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     ALAN.activate();
+    //     setTimeout(() => {
+    //       ALAN.playText('Hi I found some news for you.');
+    //     }, 500);
+    //     setNewsArticles(data.articles);
+    //   });
 
   }
 
