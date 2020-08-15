@@ -8,11 +8,12 @@ import { Card, CardTitle, CardText, CardBody } from 'reactstrap';
 
 
 function App() {
+  let [ALAN, setAlan] = useState(null);
   const [activeArticle, setActiveArticle] = useState(0);
   const [newsArticles, setNewsArticles] = useState([]);
 
   useEffect(() => {
-    const ALAN = alanBtn({
+    ALAN = alanBtn({
       key: process.env.REACT_APP_STRING_1,
       onCommand: ({ command, articles, number }) => {
         if (command === 'newHeadlines') {
@@ -36,7 +37,21 @@ function App() {
         }
       },
     })
+    setAlan(ALAN);
   }, []);
+
+  function getArticles() {
+    fetch('https://newsapi.org/v2/top-headlines?country=in&apiKey=406fbce2bc0d4d14af9dd7de15d23419')
+      .then(response => response.json())
+      .then(data => {
+        ALAN.activate();
+        setTimeout(() => {
+          ALAN.playText('Hi I found some news for you.');
+        }, 500);
+        setNewsArticles(data.articles);
+      });
+
+  }
 
   return (
     <div className="App">
@@ -48,7 +63,7 @@ function App() {
 
       <div className="main" style={{ marginTop: '100px' }}>
 
-        <Card className="box hvr-grow-shadow">
+        <Card onClick={() => { getArticles() }} className="box hvr-grow-shadow">
           <CardBody>
             <CardTitle className="ctitle">
               Latest News
@@ -56,7 +71,7 @@ function App() {
             <CardText>Try Saying Get Latest News</CardText>
           </CardBody>
         </Card>
-        <Card className="box hvr-grow-shadow">
+        <Card onClick={() => { getArticles() }} className="box hvr-grow-shadow">
           <CardBody>
             <CardTitle className="ctitle">
               News by Categories
@@ -66,7 +81,7 @@ function App() {
 Give me the latest Technology news</CardText>
           </CardBody>
         </Card>
-        <Card className="box hvr-grow-shadow">
+        <Card onClick={() => { getArticles() }} className="box hvr-grow-shadow">
           <CardBody>
             <CardTitle className="ctitle">
               News by Terms
@@ -76,7 +91,7 @@ Give me the latest Technology news</CardText>
 What's up with PlayStation 5</CardText>
           </CardBody>
         </Card>
-        <Card className="box hvr-grow-shadow">
+        <Card onClick={() => { getArticles() }} className="box hvr-grow-shadow">
           <CardBody>
             <CardTitle className="ctitle">
               News by Sources
