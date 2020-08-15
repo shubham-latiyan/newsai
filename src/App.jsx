@@ -4,24 +4,21 @@ import alanBtn from '@alan-ai/alan-sdk-web';
 import wordsToNumbers from 'words-to-numbers';
 import logo from './assets/images/logo2.png'
 import NewsCards from './components/NewsCards/NewsCards';
-import { Card, CardGroup, CardImg, CardTitle, CardText, Button, CardBody, Row, Col } from 'reactstrap';
+import { Card, CardTitle, CardText, CardBody } from 'reactstrap';
 
 
 function App() {
   const [activeArticle, setActiveArticle] = useState(0);
   const [newsArticles, setNewsArticles] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const ALAN = alanBtn({
-      key: '64370f4c903e66c5b517887fefa45c1b2e956eca572e1d8b807a3e2338fdd0dc/stage',
-      // key: 'b8dc89174e3acfc3cdfd2617e21f1b7e2e956eca572e1d8b807a3e2338fdd0dc/stage',
+      key: process.env.REACT_APP_STRING_1,
       onCommand: ({ command, articles, number }) => {
         if (command === 'newHeadlines') {
           setNewsArticles(articles);
           setActiveArticle(-1);
         } else if (command === 'instructions') {
-          setIsOpen(true);
         } else if (command === 'highlight') {
           setActiveArticle((prevActiveArticle) => prevActiveArticle + 1);
         } else if (command === 'open') {
