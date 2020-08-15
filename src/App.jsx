@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import alanBtn from '@alan-ai/alan-sdk-web';
-import logo from './assets/images/logo.png'
+import wordsToNumbers from 'words-to-numbers';
+import logo from './assets/images/logo2.png'
 import NewsCards from './components/NewsCards/NewsCards';
+import { Card, CardGroup, CardImg, CardTitle, CardText, Button, CardBody, Row, Col } from 'reactstrap';
 
 
 function App() {
@@ -11,7 +13,7 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    alanBtn({
+    const ALAN = alanBtn({
       key: '64370f4c903e66c5b517887fefa45c1b2e956eca572e1d8b807a3e2338fdd0dc/stage',
       // key: 'b8dc89174e3acfc3cdfd2617e21f1b7e2e956eca572e1d8b807a3e2338fdd0dc/stage',
       onCommand: ({ command, articles, number }) => {
@@ -23,20 +25,20 @@ function App() {
         } else if (command === 'highlight') {
           setActiveArticle((prevActiveArticle) => prevActiveArticle + 1);
         } else if (command === 'open') {
-          // const parsedNumber = number.length > 2 ? wordsToNumbers((number), { fuzzy: true }) : number;
-          // const article = articles[parsedNumber - 1];
-
-          // if (parsedNumber > 20) {
-          //   alanBtn().playText('Please try that again...');
-          // } else if (article) {
-          //   window.open(article.url, '_blank');
-          //   alanBtn().playText('Opening...');
-          // } else {
-          //   alanBtn().playText('Please try that again...');
-          // }
+          const parsedNumber = number.length > 2 ? wordsToNumbers((number), { fuzzy: true }) : number;
+          console.log('parsedNumber:', parsedNumber)
+          const article = articles[parsedNumber - 1];
+          if (parsedNumber > 20) {
+            alanBtn().playText('Please try that again...');
+          } else if (article) {
+            window.open(article.url, '_blank');
+            alanBtn().playText('Opening...');
+          } else {
+            alanBtn().playText('Please try that again...');
+          }
         }
       },
-    });
+    })
   }, []);
 
   return (
@@ -47,8 +49,53 @@ function App() {
         </div>
       </div>
 
-      <div style={{ marginTop: '95px' }} >
+      <div className="main" style={{ marginTop: '100px' }}>
+
+        <Card className="box hvr-grow-shadow">
+          <CardBody>
+            <CardTitle className="ctitle">
+              Latest News
+            </CardTitle>
+            <CardText>Try Saying Get Latest News</CardText>
+          </CardBody>
+        </Card>
+        <Card className="box hvr-grow-shadow">
+          <CardBody>
+            <CardTitle className="ctitle">
+              News by Categories
+            </CardTitle>
+            <CardText>Business, Entertainment, General, Health, Science, Sports, Technology <br /><br />
+            Try saying:
+Give me the latest Technology news</CardText>
+          </CardBody>
+        </Card>
+        <Card className="box hvr-grow-shadow">
+          <CardBody>
+            <CardTitle className="ctitle">
+              News by Terms
+            </CardTitle>
+            <CardText>Donald Trump, BitCoin, PlayStation 5, Smartphones... <br /><br />
+            Try saying:
+What's up with PlayStation 5</CardText>
+          </CardBody>
+        </Card>
+        <Card className="box hvr-grow-shadow">
+          <CardBody>
+            <CardTitle className="ctitle">
+              News by Sources
+            </CardTitle>
+            <CardText>ABC News, Wired, BBC, Time, IGN, Buzzfeed, CNN... <br /><br />
+            Try saying:
+Give me the news from CNN</CardText>
+          </CardBody>
+        </Card>
+
+      </div>
+      <div style={{ marginTop: '50px' }} >
         <NewsCards articles={newsArticles} activeArticle={activeArticle} />
+      </div>
+      <div className="me">
+        <label onClick={() => { window.open('https://about.me/shubhamlatiyan', '_blank') }}>Created By: Shubham Latiyan</label>
       </div>
     </div >
   );

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Row, Col, Card, CardTitle, CardBody, CardImg, CardText } from 'reactstrap';
+import { Row, Col, Card, CardTitle, CardBody, CardImg, CardText, Badge } from 'reactstrap';
 
 const NewsCard = ({ article: { description, publishedAt, source, title, url, urlToImage }, activeArticle, i }) => {
     useEffect(() => {
@@ -14,6 +14,7 @@ const NewsCard = ({ article: { description, publishedAt, source, title, url, url
     return (
         <Row id={"scroll_" + i} style={{ marginBottom: '20px' }} className={activeArticle === i ? 'activeCard' : null} >
             <Card className="hvr-grow-shadow">
+                <Badge color="success">{i + 1}</Badge>
                 <Row className="no-gutters">
                     <Col md="4">
                         <CardImg
