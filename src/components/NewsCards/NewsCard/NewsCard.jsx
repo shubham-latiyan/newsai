@@ -6,7 +6,7 @@ const NewsCard = ({ article: { description, publishedAt, source, title, url, url
         if (i === activeArticle) {
             document.getElementById(`scroll_${i}`).scrollIntoView({
                 behavior: 'smooth',
-                block: "center", inline: "center"
+                block: "center", inline: "end"
             });
         }
     }, [i, activeArticle]);

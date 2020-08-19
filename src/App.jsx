@@ -14,7 +14,7 @@ function App() {
 
   useEffect(() => {
     ALAN = alanBtn({
-      key: process.env.REACT_APP_STRING_1,
+      key: process.env.REACT_APP_STRING_2,
       onCommand: ({ command, articles, number }) => {
         if (command === 'newHeadlines') {
           setNewsArticles(articles);
@@ -41,16 +41,13 @@ function App() {
   }, []);
 
   function getArticles() {
-    // fetch('https://newsapi.org/v2/top-headlines?country=in&apiKey=406fbce2bc0d4d14af9dd7de15d23419')
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     ALAN.activate();
-    //     setTimeout(() => {
-    //       ALAN.playText('Hi I found some news for you.');
-    //     }, 500);
-    //     setNewsArticles(data.articles);
-    //   });
-
+    ALAN.activate();
+    setTimeout(() => {
+      ALAN.callProjectApi("setClientData", { value: "" }, (error, result) => {
+        console.log('result:', result)
+        console.log('error:', error)
+      });
+    }, 600);
   }
 
   return (
@@ -68,7 +65,9 @@ function App() {
             <CardTitle className="ctitle">
               Latest News
             </CardTitle>
-            <CardText>Try Saying Get Latest News</CardText>
+            <CardText>Try Saying Get Latest News <br /> <br />
+            Stop speech by pressing the Audio button
+            </CardText>
           </CardBody>
         </Card>
         <Card onClick={() => { getArticles() }} className="box hvr-grow-shadow">
