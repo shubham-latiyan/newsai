@@ -5,7 +5,7 @@ import wordsToNumbers from 'words-to-numbers';
 import logo from './assets/images/logo2.png'
 import NewsCards from './components/NewsCards/NewsCards';
 import { Card, CardTitle, CardText, CardBody } from 'reactstrap';
-
+import ReactGA from 'react-ga';
 
 function App() {
   let [ALAN, setAlan] = useState(null);
