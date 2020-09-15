@@ -66,18 +66,31 @@ function App() {
     });
   }
 
+  function toggleDarkMode() {
+    document.documentElement.classList.toggle('dark-mode');
+    document.querySelectorAll('.inverted').forEach(el => {
+      el.classList.toggle('invert');
+    })
+  }
+
   return (
     <div className="App">
-      <div className="header">
+      <div className="header inverted">
         <div style={{ textAlign: 'center' }}>
           <img className="logo" src={logo} alt="logo" />
         </div>
+        <label className="switch" for="checkbox" style={{ position: 'absolute', top: '24%', right: '0%' }} title="Change color scheme to dark mode">
+          <input type="checkbox" onChange={() => { toggleDarkMode() }} id="checkbox" />
+          <div className="slider round"></div>
+          <div className="toggle-moon">🌙</div>
+          <div className="toggle-sun">☀️</div>
+        </label>
       </div>
 
       <div className="main" style={{ marginTop: '100px' }}>
 
         <Card onClick={() => { getArticles() }} className="box hvr-grow-shadow">
-          <CardBody>
+          <CardBody className="inverted">
             <CardTitle className="ctitle">
               Latest News
             </CardTitle>
@@ -87,7 +100,7 @@ function App() {
           </CardBody>
         </Card>
         <Card onClick={() => { getArticles() }} className="box hvr-grow-shadow">
-          <CardBody>
+          <CardBody className="inverted">
             <CardTitle className="ctitle">
               News by Categories
             </CardTitle>
@@ -97,7 +110,7 @@ Give me the latest Technology news</CardText>
           </CardBody>
         </Card>
         <Card onClick={() => { getArticles() }} className="box hvr-grow-shadow">
-          <CardBody>
+          <CardBody className="inverted">
             <CardTitle className="ctitle">
               News by Terms
             </CardTitle>
@@ -107,7 +120,7 @@ What's up with PlayStation 5</CardText>
           </CardBody>
         </Card>
         <Card onClick={() => { getArticles() }} className="box hvr-grow-shadow">
-          <CardBody>
+          <CardBody className="inverted">
             <CardTitle className="ctitle">
               News by Sources
             </CardTitle>
