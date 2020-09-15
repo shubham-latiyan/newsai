@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Row, Col, Card, CardTitle, CardBody, CardImg, CardText, Badge } from 'reactstrap';
 
-const NewsCard = ({ article: { description, publishedAt, source, title, url, urlToImage }, activeArticle, i }) => {
+const NewsCard = ({ article: { content, description, publishedAt, source, title, url, urlToImage }, activeArticle, i }) => {
     useEffect(() => {
         if (i === activeArticle) {
             document.getElementById(`scroll_${i}`).scrollIntoView({
@@ -33,7 +33,7 @@ const NewsCard = ({ article: { description, publishedAt, source, title, url, url
                             </CardTitle>
                             <CardText>{description}</CardText>
                             <div onClick={() => { window.open(url, '_blank') }} style={{ fontSize: '13px', position: 'absolute', bottom: '6px', cursor: 'pointer' }}>
-                                Read full story at: {source.name}
+                                Read full story at: {source ? source.name : ''}
                             </div>
                         </CardBody>
                     </Col>

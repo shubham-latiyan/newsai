@@ -11,11 +11,13 @@ function App() {
   let [ALAN, setAlan] = useState(null);
   const [activeArticle, setActiveArticle] = useState(0);
   const [newsArticles, setNewsArticles] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     ALAN = alanBtn({
       key: process.env.REACT_APP_STRING_2,
       onCommand: ({ command, articles, number }) => {
+        // console.log('articles:', articles)
         if (command === 'newHeadlines') {
           setNewsArticles(articles);
           setActiveArticle(-1);
@@ -48,6 +50,20 @@ function App() {
         console.log('error:', error)
       });
     }, 600);
+  }
+
+  async function fetchMoreNews() {
+    setLoading(true);
+    const response = await fetch(`https://news-scarper-be.herokuapp.com/morenews`, {
+      method: 'POST',
+      body: JSON.stringify({ publishedAt: newsArticles[newsArticles.length - 1].publishedAt })
+    });
+    let res = await response.json();
+    setLoading(false);
+    setNewsArticles([...newsArticles, ...res.data]);
+    document.getElementById(`scroll_${newsArticles.length - 1}`).scrollIntoView({
+      block: "center", inline: "end"
+    });
   }
 
   return (
@@ -104,6 +120,12 @@ Give me the news from CNN</CardText>
       </div>
       <div style={{ marginTop: '50px' }} >
         <NewsCards articles={newsArticles} activeArticle={activeArticle} />
+        {newsArticles.length > 25 &&
+          <button onClick={fetchMoreNews} className="hvr-grow-shadow" style={styleObj}>
+            Load More &nbsp;
+            {loading && <span className="spinner-border spinner-border-sm"></span>}
+          </button>
+        }
       </div>
       <div className="me">
         <label onClick={() => { window.open('https://about.me/shubhamlatiyan', '_blank') }}>Created By: Shubham Latiyan</label>
@@ -113,3 +135,15 @@ Give me the news from CNN</CardText>
 }
 
 export default App;
+
+let styleObj = {
+  position: 'absolute',
+  left: '46%',
+  right: '45%',
+  background: 'linear-gradient(to bottom, #68caeb 1%, #00beff 100%)',
+  border: '1px solid',
+  padding: '4px 10px',
+  color: 'white',
+  marginBottom: '40px',
+  boxShadow: '0 2px 5px 0 rgb(0 0 0 / 42%), 0 2px 10px 0 rgb(0 0 0 / 38%)',
+}
