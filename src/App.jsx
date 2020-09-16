@@ -58,13 +58,11 @@ function App() {
       [...document.querySelectorAll('#cusy_card')].forEach((el => {
         el.classList.remove('hvr-grow-shadow')
       }))
-      // document.getElementById('cusy_card').classList.remove('hvr-grow-shadow');
     }
     else {
       [...document.querySelectorAll('#cusy_card')].forEach((el => {
         el.classList.add('hvr-grow-shadow')
       }))
-      // document.getElementById('cusy_card').classList.add('hvr-grow-shadow');
     }
   }
 

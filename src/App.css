@@ -1,18 +1,20 @@
 @media(min-width:0px) and (max-width: 768px) {
     .App {
         width        : 95%;
-        margin       : auto;
         overflow-y   : hidden;
-        overflow-x: hidden;
     }
 }
 
 @media (min-width: 769px) {
     .App {
         width        : 70%;
-        margin       : auto;
-        /* overflow-x: hidden; */
     }
+}
+
+#root {
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
 }
 
 #root>div>div:nth-child(n)>div>div {
