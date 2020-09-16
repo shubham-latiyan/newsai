@@ -55,10 +55,16 @@ function App() {
 
   function toggleClass() {
     if (window.innerWidth < 756) {
-      document.getElementById('cusy_card').classList.remove('hvr-grow-shadow');
+      [...document.querySelectorAll('#cusy_card')].forEach((el => {
+        el.classList.remove('hvr-grow-shadow')
+      }))
+      // document.getElementById('cusy_card').classList.remove('hvr-grow-shadow');
     }
     else {
-      document.getElementById('cusy_card').classList.add('hvr-grow-shadow');
+      [...document.querySelectorAll('#cusy_card')].forEach((el => {
+        el.classList.add('hvr-grow-shadow')
+      }))
+      // document.getElementById('cusy_card').classList.add('hvr-grow-shadow');
     }
   }
 
