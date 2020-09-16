@@ -1,15 +1,17 @@
 @media(min-width:0px) and (max-width: 768px) {
     .App {
-        width     : 96%;
-        margin    : auto;
-        overflow-y: hidden;
+        width        : 95%;
+        margin       : auto;
+        overflow-y   : hidden;
+        /* overflow-x: hidden; */
     }
 }
 
 @media (min-width: 769px) {
     .App {
-        width : 70%;
-        margin: auto;
+        width        : 70%;
+        margin       : auto;
+        /* overflow-x: hidden; */
     }
 }
 

@@ -13,7 +13,7 @@ const NewsCard = ({ article: { content, description, publishedAt, source, title,
 
     return (
         <Row id={"scroll_" + i} style={{ marginBottom: '20px' }} className={activeArticle === i ? 'activeCard' : null} >
-            <Card className="hvr-grow-shadow">
+            <Card id="cusy_card" className="hvr-grow-shadow">
                 <Badge color="success">{i + 1}</Badge>
                 <Row className="no-gutters">
                     <Col md="4">
@@ -32,7 +32,7 @@ const NewsCard = ({ article: { content, description, publishedAt, source, title,
                                 </div>
                             </CardTitle>
                             <CardText className="inverted">{description}</CardText>
-                            <div className="inverted" onClick={() => { window.open(url, '_blank') }} style={{ fontSize: '13px', position: 'absolute', bottom: '6px', cursor: 'pointer' }}>
+                            <div className="inverted" onClick={() => { window.open(url, '_blank') }} style={{ fontSize: '13px', fontWeight: 400, position: 'absolute', bottom: '6px', cursor: 'pointer' }}>
                                 Read full story at: {source ? source.name : ''}
                             </div>
                         </CardBody>

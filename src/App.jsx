@@ -20,6 +20,7 @@ function App() {
         // console.log('articles:', articles)
         if (command === 'newHeadlines') {
           setNewsArticles(articles);
+          toggleClass();
           setActiveArticle(-1);
         } else if (command === 'instructions') {
         } else if (command === 'highlight') {
@@ -52,6 +53,15 @@ function App() {
     }, 600);
   }
 
+  function toggleClass() {
+    if (window.innerWidth < 756) {
+      document.getElementById('cusy_card').classList.remove('hvr-grow-shadow');
+    }
+    else {
+      document.getElementById('cusy_card').classList.add('hvr-grow-shadow');
+    }
+  }
+
   async function fetchMoreNews() {
     setLoading(true);
     const response = await fetch(`https://news-scarper-be.herokuapp.com/morenews`, {
@@ -64,6 +74,7 @@ function App() {
     document.getElementById(`scroll_${newsArticles.length - 1}`).scrollIntoView({
       block: "center", inline: "end"
     });
+    toggleClass();
   }
 
   function toggleDarkMode() {
@@ -79,7 +90,7 @@ function App() {
         <div style={{ textAlign: 'center' }}>
           <img className="logo" src={logo} alt="logo" />
         </div>
-        <label className="switch" for="checkbox" style={{ position: 'absolute', top: '24%', right: '0%' }} title="Change color scheme to dark mode">
+        <label className="switch" htmlFor="checkbox" style={{ position: 'absolute', top: '24%', right: '0%' }} title="Change color scheme to dark mode">
           <input type="checkbox" onChange={() => { toggleDarkMode() }} id="checkbox" />
           <div className="slider round"></div>
           <div className="toggle-moon">🌙</div>
@@ -134,10 +145,14 @@ Give me the news from CNN</CardText>
       <div style={{ marginTop: '50px' }} >
         <NewsCards articles={newsArticles} activeArticle={activeArticle} />
         {newsArticles.length > 25 &&
-          <button onClick={fetchMoreNews} className="hvr-grow-shadow" style={styleObj}>
-            Load More &nbsp;
+          <>
+            <button onClick={fetchMoreNews} className="hvr-grow-shadow" style={styleObj}>
+              Load More &nbsp;
             {loading && <span className="spinner-border spinner-border-sm"></span>}
-          </button>
+            </button>
+            <br />
+            <br />
+          </>
         }
       </div>
       <div className="me">
@@ -150,9 +165,8 @@ Give me the news from CNN</CardText>
 export default App;
 
 let styleObj = {
-  position: 'absolute',
-  left: '46%',
-  right: '45%',
+  display: 'flex',
+  margin: 'auto',
   background: 'linear-gradient(to bottom, #68caeb 1%, #00beff 100%)',
   border: '1px solid',
   padding: '4px 10px',
