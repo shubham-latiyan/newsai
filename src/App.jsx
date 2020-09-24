@@ -152,7 +152,7 @@ Give me the news from CNN</CardText>
           <>
             <button onClick={fetchMoreNews} className="hvr-grow-shadow" style={styleObj}>
               Load More &nbsp;
-            {loading && <span className="spinner-border spinner-border-sm"></span>}
+            {loading && <span style={{marginTop: '4px'}} className="spinner-border spinner-border-sm"></span>}
             </button>
             <br />
             <br />
