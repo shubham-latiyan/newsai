@@ -68,7 +68,7 @@ function App() {
 
   async function fetchMoreNews() {
     setLoading(true);
-    const response = await fetch(`https://news-scarper-be.herokuapp.com/morenews`, {
+    const response = await fetch(`https://newsbe.vercel.app/morenews`, {
       method: 'POST',
       body: JSON.stringify({ publishedAt: newsArticles[newsArticles.length - 1].publishedAt })
     });
